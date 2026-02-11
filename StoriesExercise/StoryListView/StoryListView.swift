@@ -9,11 +9,11 @@ import SwiftUI
 
 @Observable
 final class StoryListViewModel {
-    var items: [Int] = []
+    var storyItems: [StoryBO] = []
 
-    private let pageSize = 20
-    private let maxWindowSize = 60
-    private var currentPage: Int = 0
+    @ObservationIgnored private let pageSize = 20
+    @ObservationIgnored private let maxWindowSize = 60
+    @ObservationIgnored private var currentPage: Int = 0
 
     init() {
 //        loadNextPageIfNeeded(currentItem: nil)
@@ -23,8 +23,13 @@ final class StoryListViewModel {
 //        items.append(contentsOf: [1,2,3])
         Task {
             let stories = try await StoriesRepository().loadStories(page: 20, pageSize: 30)
-            print("XX: story \(stories.first?.author)")
+            storyItems = stories
+            print("XX: story \(stories.first?.compactImageURL)")
         }
+    }
+
+    func itemTapped(item: StoryBO) {
+
     }
 
 //    func loadNextPageIfNeeded(currentItem: Int?) {
@@ -61,16 +66,16 @@ extension StoryListView {
         static let horizontalSpacing: CGFloat = 16
         static let horizontalPadding: CGFloat = 16
 
-        static let storyCircleSize: CGFloat = 72
-        static let storyItemSpacing: CGFloat = 8
+        static let storyItemWidth: CGFloat = 88
+        static let storyItemSpacing: CGFloat = 8 // remove?
     }
 }
 
 struct StoryListView: View {
-    @State var viewModel: StoryListViewModel
+    @State private var viewModel = StoryListViewModel()
 
     init() {
-        viewModel = StoryListViewModel() // injection?
+//        viewModel = StoryListViewModel() // injection?
     }
 
     var body: some View {
@@ -80,10 +85,14 @@ struct StoryListView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Constants.horizontalSpacing) {
-                    ForEach(viewModel.items, id: \.self) { item in
-                        StoryListItemView(id: item)
+                    ForEach(viewModel.storyItems, id: \.self) { item in
+                        StoryListItemView(story: item)
+                            .frame(width: Constants.storyItemWidth)
                             .onAppear {
 //                                viewModel.loadNextPageIfNeeded(currentItem: item)
+                            }
+                            .onTapGesture {
+                                viewModel.itemTapped(item: item)
                             }
                     }
                 }

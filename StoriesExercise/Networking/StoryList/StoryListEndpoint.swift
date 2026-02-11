@@ -17,7 +17,7 @@ enum StoryListEndpoint: EndpointType {
     var path: String {
         switch self {
         case .fetchStories:
-            return "/list" // ?page=2&limit=100
+            return "/list"
         }
     }
 

@@ -31,33 +31,10 @@ final class NetworkService: NetworkServicing {
 
         guard let httpResponse = response as? HTTPURLResponse,
               200..<300 ~= httpResponse.statusCode else {
-            throw URLError(.badServerResponse)
+            throw NetworkError.badResponse
         }
 
         return try JSONDecoder().decode(T.self, from: data)
-    }
-}
-
-// MARK: - Repository Protocol
-
-protocol StoriesRepositoryProtocol {
-    func loadStories(page: Int, pageSize: Int) async throws -> [StoryDTO]
-}
-
-// MARK: - Repository Implementation
-
-final class StoriesRepository: StoriesRepositoryProtocol {
-
-    private let networkService: NetworkServicing
-
-    init(networkService: NetworkServicing = NetworkService()) {
-        self.networkService = networkService
-    }
-
-    func loadStories(page: Int, pageSize: Int) async throws -> [StoryDTO] {
-        let endpoint = StoryListEndpoint.fetchStories(page: page, pageSize: pageSize)
-        // need to implement infinite scrolling by replacing page in it's gone too far
-        return try await networkService.request(endpoint)
     }
 }
 
