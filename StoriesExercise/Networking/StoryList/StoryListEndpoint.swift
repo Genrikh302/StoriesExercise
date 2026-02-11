@@ -33,7 +33,7 @@ enum StoryListEndpoint: EndpointType {
         case let .fetchStories(page, pageSize):
             return [
                 URLQueryItem(name: "page", value: "\(page)"),
-                URLQueryItem(name: "pageSize", value: "\(pageSize)")
+                URLQueryItem(name: "limit", value: "\(pageSize)")
             ]
         }
     }

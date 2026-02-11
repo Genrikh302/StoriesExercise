@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct StoryBO: Identifiable, Hashable {
-    let id: String
-    let author: String
-    let compactImageURL: URL
-    let fullImageURL: URL
+public struct StoryBO: Identifiable, Hashable {
+    public let id: String
+    public let author: String
+    public let compactImageURL: URL
+    public let fullImageURL: URL
 }

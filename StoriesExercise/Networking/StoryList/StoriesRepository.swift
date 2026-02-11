@@ -25,6 +25,7 @@ final class StoriesRepository: StoriesRepositoryProtocol {
     }
 
     func loadStories(page: Int, pageSize: Int) async throws -> [StoryBO] {
+        print("XX: loadStories \(page) \(pageSize)")
         let endpoint = StoryListEndpoint.fetchStories(page: page, pageSize: pageSize)
         let dtos: [StoryDTO] = try await networkService.request(endpoint)
         return mapper.map(dtos)
