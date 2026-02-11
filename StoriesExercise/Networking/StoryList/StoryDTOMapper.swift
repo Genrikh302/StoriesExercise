@@ -13,7 +13,7 @@ struct StoryDTOMapper: DTOtoBOMapper {
         // Create a compact sizing if the original is too big
         let fullURL = input.downloadUrl
 
-        let maxDimension = 1000
+        let maxDimension = 500
         var compactWidth = input.width
         var compactHeight = input.height
         if input.width > maxDimension || input.height > maxDimension {
@@ -25,11 +25,25 @@ struct StoryDTOMapper: DTOtoBOMapper {
             string: "https://picsum.photos/id/\(input.id)/\(compactWidth)/\(compactHeight)"
         )!
 
+        // Also downsize generally large images this API sometimes return 5000x5000 photos
+        let maxFullDimension = 1000
+        var fullWidth = input.width
+        var fullHeight = input.height
+        if input.width > maxFullDimension || input.height > maxFullDimension {
+            fullWidth = input.width / 5
+            fullHeight = input.height / 5
+        }
+
+        let fullImageURL = URL(
+            string: "https://picsum.photos/id/\(input.id)/\(fullWidth)/\(fullHeight)"
+        )!
+
+
         return StoryBO(
             id: input.id,
             author: input.author,
             compactImageURL: compactURL,
-            fullImageURL: fullURL
+            fullImageURL: fullImageURL
         )
     }
 }

@@ -28,6 +28,16 @@ struct StoryListView: View {
         VStack(spacing: Constants.verticalSpacing) {
             contentView()
         }
+        .fullScreenCover(item: $viewModel.route) { route in
+            switch route {
+            case .storyPlayer(let stories, let initialIndex, let lastLoadedPage):
+                StoryPlayerView(
+                    stories: stories,
+                    initialIndex: initialIndex,
+                    lastLoadedPage: lastLoadedPage
+                )
+            }
+        }
         .task {
             if viewModel.storyItems.isEmpty {
                 await viewModel.loadNextPageIfNeeded(currentItem: nil)
@@ -40,12 +50,8 @@ struct StoryListView: View {
         switch viewModel.state {
         case .idle:
             storiesScrollView()
-        case .loading:
-            if viewModel.storyItems.isEmpty {
-                loadingView()
-            } else {
-                storiesScrollView(showPaginationLoader: true)
-            }
+        case .initialLoading:
+            loadingView()
         case .error(let message):
             if viewModel.storyItems.isEmpty {
                 errorView(message: message)
@@ -55,14 +61,14 @@ struct StoryListView: View {
         }
     }
 
-    private func storiesScrollView(showPaginationLoader: Bool = false) -> some View {
+    private func storiesScrollView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: Constants.horizontalSpacing) {
-                ForEach(viewModel.storyItems, id: \.self) { item in
+                ForEach(viewModel.storyItems, id: \.id) { item in
                     StoryListItemView(story: item)
                         .frame(width: Constants.storyItemWidth)
                         .onAppear {
-                            Task { // This will run only if 
+                            Task { // This will run only if we are close to the end so no need for .task
                                 await viewModel.loadNextPageIfNeeded(currentItem: item)
                             }
                         }
@@ -71,7 +77,7 @@ struct StoryListView: View {
                         }
                 }
 
-                if showPaginationLoader {
+                if viewModel.isPaginating {
                     ProgressView()
                         .frame(width: Constants.storyItemWidth)
                 }

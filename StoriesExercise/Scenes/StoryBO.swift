@@ -12,4 +12,7 @@ public struct StoryBO: Identifiable, Hashable {
     public let author: String
     public let compactImageURL: URL
     public let fullImageURL: URL
+
+    public var isLiked: Bool = false
+    public var isViewd: Bool = false
 }
