@@ -18,10 +18,15 @@ extension StoryListView {
 }
 
 struct StoryListView: View {
-    @State private var viewModel = StoryListViewModel()
+    @State private var viewModel: StoryListViewModel
 
-    init() {
-//        viewModel = StoryListViewModel() // injection?
+    init(interactionStore: StoryInteractionStoring) {
+        let repository = StoriesRepository()
+        let viewModel = StoryListViewModel(
+            repository: repository,
+            interactionStore: interactionStore
+        )
+        _viewModel = State(initialValue: viewModel)
     }
 
     var body: some View {
@@ -31,11 +36,19 @@ struct StoryListView: View {
         .fullScreenCover(item: $viewModel.route) { route in
             switch route {
             case .storyPlayer(let stories, let initialIndex, let lastLoadedPage):
-                StoryPlayerView(
+                let playerViewModel = StoryPlayerViewModel(
+                    interactionStore: viewModel.interactionStore,
                     stories: stories,
                     initialIndex: initialIndex,
                     lastLoadedPage: lastLoadedPage
                 )
+
+                StoryPlayerView(viewModel: playerViewModel)
+            }
+        }
+        .onChange(of: viewModel.route) { _, newValue in
+            if newValue == nil {
+                viewModel.refreshInteractions()
             }
         }
         .task {

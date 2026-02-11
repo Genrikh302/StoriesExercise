@@ -7,21 +7,6 @@
 
 import Foundation
 
-enum Route: Identifiable { // move to separate file
-    case storyPlayer(
-        stories: [StoryBO],
-        initialIndex: Int,
-        lastLoadedPage: Int
-    )
-
-    var id: String {
-        switch self {
-        case .storyPlayer(_, let index, let lastLoadedPage):
-            return "storyPlayer_\(index)_page_\(lastLoadedPage)"
-        }
-    }
-}
-
 @Observable
 public final class StoryListViewModel {
     enum ViewState: Equatable {
@@ -36,6 +21,7 @@ public final class StoryListViewModel {
     var route: Route? = nil
 
     @ObservationIgnored private let repository: StoriesRepositoryProtocol
+    @ObservationIgnored let interactionStore: StoryInteractionStoring
     @ObservationIgnored private let pageSize = 30
     @ObservationIgnored private var currentPage: Int = 1
     @ObservationIgnored private var isLoadingPage = false
@@ -46,8 +32,12 @@ public final class StoryListViewModel {
     // @ObservationIgnored private var highestPageLoaded: Int = 1
 
 
-    init(repository: StoriesRepositoryProtocol = StoriesRepository()) {
+    init(
+        repository: StoriesRepositoryProtocol = StoriesRepository(),
+        interactionStore: StoryInteractionStoring
+    ) {
         self.repository = repository
+        self.interactionStore = interactionStore
     }
 }
 
@@ -102,6 +92,7 @@ public extension StoryListViewModel {
             )
 
             storyItems.append(contentsOf: newStories)
+            hydrateInteractions()
             currentPage = page
             state = .idle
 
@@ -109,9 +100,24 @@ public extension StoryListViewModel {
             state = .error(error.localizedDescription)
         }
     }
+
+    func refreshInteractions() {
+        hydrateInteractions()
+    }
 }
 
 private extension StoryListViewModel {
+    private func hydrateInteractions() {
+        for index in storyItems.indices {
+            let id = storyItems[index].id
+
+            if let interaction = interactionStore.interaction(for: id) {
+                storyItems[index].isViewed = interaction.isViewed
+                storyItems[index].isLiked = interaction.isLiked
+            }
+        }
+    }
+
     /*
     private func trimWindowIfNeeded(removingFromFront: Bool) {
         guard storyItems.count > maxWindowSize else { return }

@@ -14,5 +14,5 @@ public struct StoryBO: Identifiable, Hashable {
     public let fullImageURL: URL
 
     public var isLiked: Bool = false
-    public var isViewd: Bool = false
+    public var isViewed: Bool = false
 }

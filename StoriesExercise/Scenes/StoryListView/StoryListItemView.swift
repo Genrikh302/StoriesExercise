@@ -28,7 +28,7 @@ struct StoryListItemView: View {
                     Circle()
                         .fill(Color.gray.opacity(0.2))
                         .overlay(
-                            Image(systemName: "photo") // replace with some funky gradient
+                            Image(systemName: "photo") // replace with some funky gradient maybe
                         )
                 @unknown default:
                     EmptyView()
@@ -36,6 +36,21 @@ struct StoryListItemView: View {
             }
             .frame(width: 72, height: 72)
             .clipShape(Circle())
+            .overlay(
+                Circle()
+                    .stroke(
+                        story.isViewed
+                        ? AnyShapeStyle(Color.gray.opacity(0.5))
+                        : AnyShapeStyle(
+                            LinearGradient(
+                                colors: [.pink, .orange, .yellow],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        ),
+                        lineWidth: 3
+                    )
+            )
 
             Text(story.author)
                 .font(.caption2)
