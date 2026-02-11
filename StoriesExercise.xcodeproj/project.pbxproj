@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		769BDA0E2F3D107D00BD248B /* stories_mock_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 769BDA0D2F3D107D00BD248B /* stories_mock_response.json */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		764AFE472F3D0AF90003B756 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -31,7 +27,6 @@
 		764AFE372F3D0AF70003B756 /* StoriesExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoriesExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		764AFE462F3D0AF90003B756 /* StoriesExerciseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoriesExerciseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		764AFE502F3D0AF90003B756 /* StoriesExerciseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoriesExerciseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		769BDA0D2F3D107D00BD248B /* stories_mock_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = stories_mock_response.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -84,7 +79,6 @@
 				764AFE492F3D0AF90003B756 /* StoriesExerciseTests */,
 				764AFE532F3D0AF90003B756 /* StoriesExerciseUITests */,
 				764AFE382F3D0AF70003B756 /* Products */,
-				769BDA0D2F3D107D00BD248B /* stories_mock_response.json */,
 			);
 			sourceTree = "<group>";
 		};
@@ -218,7 +212,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				769BDA0E2F3D107D00BD248B /* stories_mock_response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
