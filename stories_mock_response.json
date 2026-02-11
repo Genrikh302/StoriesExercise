@@ -1,0 +1,107 @@
+{
+    "stories": [
+        {
+            "id": "e55ffba4-1075-43e2-b4b0-555bce2cee55",
+            "pictureUrl": "",
+            "author": "alice"
+        },
+        {
+            "id": "d33eb08c-bfb8-4226-8a53-6bb869452a7e",
+            "pictureUrl": "",
+            "author": "bob"
+        },
+        {
+            "id": "ca3803f3-2c48-4394-87b3-05ffd1a109e5",
+            "pictureUrl": "",
+            "author": "charlie"
+        },
+        {
+            "id": "40863ec3-825e-4b37-aefe-124367d55b0b",
+            "pictureUrl": "",
+            "author": "diana"
+        },
+        {
+            "id": "a74f8da8-88cf-43b0-96a2-dfb68c411715",
+            "pictureUrl": "",
+            "author": "ethan"
+        },
+        {
+            "id": "b6d08cf6-e152-4366-915a-2e82c28e5024",
+            "pictureUrl": "",
+            "author": "fiona"
+        },
+        {
+            "id": "2dc786bb-4a18-4dc2-9a71-cbc75bff0aa3",
+            "pictureUrl": "",
+            "author": "george"
+        },
+        {
+            "id": "36d4105e-1d4e-44ab-a80c-84c86b1852bf",
+            "pictureUrl": "",
+            "author": "hannah"
+        },
+        {
+            "id": "8009dfd4-f25b-4a7b-9268-d0d9174307ed",
+            "pictureUrl": "",
+            "author": "ivan"
+        },
+        {
+            "id": "8b542b26-2a8d-4dc7-b279-8608e3287980",
+            "pictureUrl": "",
+            "author": "julia"
+        },
+        {
+            "id": "906d865b-4539-4446-a3a2-52e29edf0953",
+            "pictureUrl": "",
+            "author": "alice"
+        },
+        {
+            "id": "f0c7cc67-19a8-4655-ae65-d90d8ef45675",
+            "pictureUrl": "",
+            "author": "bob"
+        },
+        {
+            "id": "882d4dd2-8d7b-4ab5-a2af-b97150b32942",
+            "pictureUrl": "",
+            "author": "charlie"
+        },
+        {
+            "id": "e1539d2f-6e14-43ca-b1a9-278a47ea5d93",
+            "pictureUrl": "",
+            "author": "diana"
+        },
+        {
+            "id": "389b3ac7-080b-4440-a46f-db42d94d8f06",
+            "pictureUrl": "",
+            "author": "ethan"
+        },
+        {
+            "id": "f357d815-7a78-4cc4-a59c-81db636d9525",
+            "pictureUrl": "",
+            "author": "fiona"
+        },
+        {
+            "id": "09ddb343-7f2f-4741-9c97-796bceae47c0",
+            "pictureUrl": "",
+            "author": "george"
+        },
+        {
+            "id": "5802263e-7b49-4df5-802b-0ff3c56347fa",
+            "pictureUrl": "",
+            "author": "hannah"
+        },
+        {
+            "id": "43d51399-d2b5-4262-a4ee-49ce87ec55ce",
+            "pictureUrl": "",
+            "author": "ivan"
+        },
+        {
+            "id": "b540420a-968b-4b8b-b7b7-3bf58b3e87e6",
+            "pictureUrl": "",
+            "author": "julia"
+        }
+    ],
+    "page": 1,
+    "pageSize": 20,
+    "hasMore": true
+}
